@@ -1,0 +1,1 @@
+{"jobID":"5cd642e2-a9f8-2355-f874-9a4920109052","spec":{"type":"policy","cause":{"Message":"","User":"volodymyrrozdolsky \u003crozdolskyvolodymyr@gmail.com\u003e"},"spec":{"default:deployment/nginxhello":{"add":{"tag.nginxhello":"semver:~1.19.x"},"remove":{}}}},"result":null}
