@@ -28,14 +28,26 @@
 #                   number: {{ $svcPort }}
 # {{- end }}
 ---
-apiVersion: networking.k8s.io/v1   
-kind: Ingress   
+
+IntelliJ IDEA
+
+{{- if .Values.ingress.enabled -}}
+{{- $fullName := include "nginxhello.fullname" . -}}
+{{- $svcPort := .Values.service.port -}}
+{{- if semverCompare ">=1.14-0" .Capabilities.KubeVersion.GitVersion -}}
+apiVersion: networking.k8s.io/v1
+{{- else -}}
+apiVersion: extensions/v1
+{{- end }}
+kind: Ingress
 metadata:
+  name: {{ $fullName }}
   labels:
-    app: nginxhello
-  name: single-default-backend-ingress
+    {{- include "nginxhello.labels" . | nindent 4 }}
+  {{- with .Values.ingress.annotations }}
   annotations:
-    fluxcd.io/ignore: "true"  
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
 spec: 
   rules:
     - http:
