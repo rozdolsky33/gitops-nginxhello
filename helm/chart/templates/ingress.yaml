@@ -26,3 +26,4 @@ spec:
                 name: nginxhello
                 port:
                   number: 80
+{{- end }}
