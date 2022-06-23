@@ -18,12 +18,16 @@ metadata:
 spec:
   rules:
   {{ if .Values.ingress.host }}- host: {{ .Values.ingress.host }}
-    http:
-{{- else -}}
   - http:
+{{- else -}}
+    http:
 {{- end }}
       paths:
-      - backend:
-          serviceName: {{ $fullName }}
-          servicePort: {{ $svcPort }}
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: {{ $fullName }}
+            port: 
+              number: {{ $svcPort }}
 {{- end }}
